@@ -1,48 +1,56 @@
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
-  // Form data for the login modal
-  $scope.loginData = {};
 
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+.controller('weatherCtrl', function($scope, $http) {
+    var currentCity = new BMap.LocalCity();
+    currentCity.get(function(result) {
+        $scope.currentCity = result.name;
+        $http.get('https://soyaapi.herokuapp.com/api/weather?location=' + $scope.currentCity + '&current_only=1').success(function(data) {
+            $scope.weatherData = data;
+        });
+    });
+
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+.controller('mapCtrl', function($scope, $http, $timeout) {
+
+    var geolocation = new BMap.Geolocation();
+    geolocation.getCurrentPosition(function(r) {
+        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+            var mk = new BMap.Marker(r.point);
+            var topLeftControl = new BMap.NavigationControl({
+                anchor: BMAP_ANCHOR_TOP_LEFT
+            });
+            var map = new BMap.Map('fuckmap');
+            map.addOverlay(mk);
+            map.centerAndZoom(r.point, 15);
+            map.addControl(topLeftControl);
+        } else {
+            alert('获取位置失败');
+        }
+    }, {
+        enableHighAccuracy: true
+    })
+
+
+})
+
+.controller('filmCtrl', function($scope, $http) {
+    var currentCity = new BMap.LocalCity();
+    currentCity.get(function(result) {
+        $scope.currentCity = result.name;
+        $http.get('https://soyaapi.herokuapp.com/api/movie/hot?location=' + $scope.currentCity).success(function(data) {
+            $scope.filmData = data.data;
+            console.log(data);
+        });
+    });
+
+})
+
+.controller('filmItemCtrl', function($scope, $stateParams) {
+
+
 });

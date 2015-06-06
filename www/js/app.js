@@ -34,47 +34,41 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: "/weather",
     views: {
       'menuContent': {
-        templateUrl: "templates/weather.html"
+        templateUrl: "templates/weather.html",
+        controller: 'weatherCtrl'
       }
     }
   })
 
-  .state('app.search', {
-    url: "/search",
+  .state('app.map', {
+    url: "/map",
     views: {
       'menuContent': {
-        templateUrl: "templates/search.html"
+        templateUrl: "templates/map.html",
+        controller: 'mapCtrl'
       }
     }
   })
 
-  .state('app.browse', {
-    url: "/browse",
+  .state('app.film', {
+    url: "/film",
     views: {
       'menuContent': {
-        templateUrl: "templates/browse.html"
+        templateUrl: "templates/film.html",
+        controller: 'filmCtrl'
       }
     }
   })
-    .state('app.playlists', {
-      url: "/playlists",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
 
   .state('app.single', {
-    url: "/playlists/:playlistId",
+    url: "/film/:filmId",
     views: {
       'menuContent': {
-        templateUrl: "templates/playlist.html",
-        controller: 'PlaylistCtrl'
+        templateUrl: "templates/filmItem.html",
+        //controller: 'filmItemCtrl'
       }
     }
   });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+
+  $urlRouterProvider.otherwise('/app/weather');
 });

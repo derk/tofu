@@ -1,0 +1,11 @@
+<ion-view view-title="电影">
+    <ion-content>
+        <div class="list">
+            <a ng-repeat="film in filmData" class="item item-thumbnail-left" ng-href="{{'/#/app/film/'+film.name}}">
+                <img ng-src="{{film.picture}}">
+                <h2>{{film.name}}</h2>
+                <p>{{film.director}}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

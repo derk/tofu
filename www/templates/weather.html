@@ -1,5 +1,36 @@
-<ion-view view-title="天气">
-  <ion-content>
-    <h1>Search</h1>
-  </ion-content>
+<ion-view view-title="天气" view-class="clam">
+    <ion-content>
+        <div class="list">
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-calendar"></i>日期
+                <span class="item-note">
+                	{{weatherData.data.weather_info.date}}
+                </span>
+            </a>
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-ios-sunny-outline"></i>天气
+                <span class="item-note">
+                	{{weatherData.data.weather_info.name}}
+                </span>
+            </a>
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-ios-rewind-outline"></i>风向
+                <span class="item-note">
+                	{{weatherData.data.weather_info.wind}}
+                </span>
+            </a>
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-thermometer"></i>温度
+               <span class="item-note">
+                	{{weatherData.data.weather_info.temperature}}
+                </span>
+            </a>
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-ios-world-outline"></i>pm25
+                <span class="item-note">
+                	{{weatherData.data.weather_info.pm25}}
+                </span>
+            </a>
+        </div>
+    </ion-content>
 </ion-view>
